@@ -1,4 +1,4 @@
-# Serverless Movies Api
+# Serverless Movies API
 
 ### Project Overview:
 
