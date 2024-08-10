@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: movies-api
+
+Resources:
+  MoviesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Movies
+      AttributeDefinitions:
+        - AttributeName: title
+          AttributeType: S
+      KeySchema:
+        - AttributeName: title
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+  GetMoviesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/getMovies.handler
+      Runtime: nodejs18.x
+      MemorySize: 128
+      Timeout: 10
+      Environment:
+        Variables:
+          MOVIES_TABLE: !Ref MoviesTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref MoviesTable
+      Events:
+        GetMovies:
+          Type: Api
+          Properties:
+            Path: /getMovies
+            Method: get
+
+Outputs:
+  MoviesApi:
+    Description: "API Gateway endpoint URL for Prod stage"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  GetMoviesFunction:
+    Description: "Get Movies Lambda Function ARN"
+    Value: !GetAtt GetMoviesFunction.Arn
+  GetMoviesFunctionIamRole:
+    Description: "Implicit IAM Role created for Get Movies function"
+    Value: !GetAtt GetMoviesFunctionRole.Arn
