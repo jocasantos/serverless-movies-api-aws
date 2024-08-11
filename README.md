@@ -2,11 +2,12 @@
 
 ### Project Overview:
 
-- Briefly describe what the project does.
+- Create a rest API which give a list of movies. We will use some AWS Services, S3, Lambda, DynamoDB and APIGateway. Build the project using only SDK, i.e. Visual Studio + CLI.
 
 ### Prerequisites:
 
-- List what is needed to run the project (Node.js, AWS CLI, SAM CLI, etc.).
+- AWS account
+- Docker account (just running in the background)
 
 ### Setup Instructions:
 
