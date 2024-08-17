@@ -31,7 +31,3 @@
 ### Testing the API:
 
 - After deployment, you'll receive the API Gateway URL. You can test your endpoints using tools like curl, Postman, or directly from the browser.
-
-### Troubleshooting:
-
-- Common issues and their fixes.
